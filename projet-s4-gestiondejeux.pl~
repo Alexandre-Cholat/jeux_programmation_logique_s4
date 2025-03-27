@@ -2,9 +2,18 @@
 joue(tjrs4,_,4).
 joue(tjrs5,_,5).
 
-/*comment determiner de quelle cote de la liste nous jouons?
-joue(strat2,[[X,Y]|_],Rep):-*/
+/*comment determiner de quelle cote de la liste nous jouons?*/
 
+joue(strat2,[[E1,E2]|_],Rep):-E1 + 1 =:= E2, Rep = 4.
+joue(strat2,[[E1,E2]|_],Rep):-E1 > E2, Rep = 4.
+joue(strat2,[[X,X]|_],4).
+joue(strat2,_,N):-random_between(2,4,N).
+
+/*Détection de l'adversaire qui joue toujours titfortat.*/
+joue(antititfortat,[[E1,E2]|L], R):- titfortat(L, E2 ,3), write('titfortat detected'),E1>2, R = E1 -1.
+joue(antititfortat,[[_,E2]|L], 5):- titfortat(L, E2 ,3), write('titfortat detected').
+/*cas ou il ne joue pas titfortat*/
+joue(antititfortat,L, R):-joue(aleatwar234,L,R).
 
 /*aleatoire*/
 joue(aleatwar,_,N):-random_between(1,5,N).
@@ -12,7 +21,7 @@ joue(aleatwar,_,N):-random_between(1,5,N).
 /*aleatoire entre 2 et 5, inferieure a aleatwar234 */
 joue(aleatwar25,_,N):-random_between(2,5,N).
 
-/*aleatoire entre 3 et 5, marche tres bien contre tit for tat*/
+/*aleatoire entre 3 et 5, marche bien contre tit for tat*/
 joue(aleatwar35,_,N):-random_between(3,5,N).
 
 /*aleatoire entre 2 et 4, bat aleatwar35 ET titfortat*/
@@ -22,10 +31,23 @@ joue(aleatwar234,_,N):-random_between(2,4,N).
 joue(aleatwar34,_,N):-random_between(3,4,N).
 
 
+
+
 /*coup prÃƒÂ©cÃƒÂ©dent de l'adversaire
 */
 joue(titfortat,[],N):-random_between(1,5,N).
 joue(titfortat,[[_,C]|_],C).
+
+
+
+/*pour antititfortat*/
+titfortat(_,_,0).
+titfortat([[E1,E2]|L], Avant,Compte):-Avant =:= E2, C1 is Compte - 1, titfortat(L,E1,C1).
+
+
+
+/*Vos coups précédents sont toujours en première position*/
+/* ce programme de gestion de jeux est donc seulement pour Equipe 1*/
 
 gestionDeJeux(Equipe1, Equipe2, NbDeParties, FinalScore1, FinalScore2) :-
     jeuxV1(Equipe1, Equipe2, [], NbDeParties, 0, 0, FinalScore1, FinalScore2),!.
