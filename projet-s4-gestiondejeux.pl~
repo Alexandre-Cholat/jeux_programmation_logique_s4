@@ -1,6 +1,5 @@
 /*Joue toujours 4*/
 joue(tjrs4,_,4).
-joue(tjrs5,_,5).
 
 
 /*aleatoire*/
