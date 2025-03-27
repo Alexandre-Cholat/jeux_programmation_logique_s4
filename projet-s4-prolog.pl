@@ -1,34 +1,41 @@
-
 /*Joue toujours 4*/
 joue(tjrs4,[],4).
 
 /*aleatoire*/
 joue(aleatwar,_,N):-random_between(1,5,N).
 
-/*coup précédent de l'adversaire */
+/*coup précédent de l'adversaire 
+*/
 joue(titfortat,[],N):-random_between(1,5,N).
 joue(titfortat,[[_,C]|_],C).
 
 
-gestionDeJeux(equipe1,equipe2,nbDeParties, FinalScore1, FinalScore2):-jeuxV1(equipe1,equipe2,[], nbDeParties, 0, 0, FinalScore1, FinalScore2).
+% Main predicate to start the game
+gestionDeJeux(Equipe1, Equipe2, NbDeParties) :- 
+    jeuxV1(Equipe1, Equipe2, [], NbDeParties, 0, 0, Score1, Score2), 
+    format("Final Score: Joueur 1 - ~w, Joueur 2 - ~w~n", [Score1, Score2]).
 
+% Base case: stop when the number of rounds is reached
+jeuxV1(_, _, L, NbDeParties, Score1, Score2, Score1, Score2) :- 
+    length(L, Z), Z == NbDeParties.
 
-/* arret quand nb de parties== list length*/
-jeuxV1(_, _, L, NbDeParties, Score1, Score2, Score1, Score2) :-
-    length(L, Z),
-    write('Checking base case: '),
-    write(Z),
-    write(' == '),
-    write(NbDeParties),
-    nl,
-    Z == NbDeParties.
+% Case when the numbers are consecutive
+jeuxV1(Equipe1, Equipe2, L, NbDeParties, Score1, Score2, FinalScore1, FinalScore2) :-
+    joue(Equipe1, L, E1), 
+    joue(Equipe2, L, E2),
+    abs(E1 - E2) =:= 1,
+    (E1 < E2 -> NewScore1 is Score1 + E1 + E2, NewScore2 is Score2
+    ; NewScore1 is Score1, NewScore2 is Score2 + E1 + E2),
+    jeuxV1(Equipe1, Equipe2, [[E1, E2] | L], NbDeParties, NewScore1, NewScore2, FinalScore1, FinalScore2).
 
-jeuxV1(equipe1, equipe2, L, nbDeParties, Score1, Score2, FinalScore1, FinalScore2):- joue(equipe1,L, E1), joue(equipe2,L, E2), E2 + 1 =:= E1, NouvScore is E1 + E2 + Score2, write(E1), write(E2), jeuxV1(equipe1, equipe2, [[E1,E2]|L], nbDeParties, Score1, NouvScore, FinalScore1, FinalScore2),!.
-
-jeuxV1(equipe1, equipe2, L, nbDeParties, Score1, Score2, FinalScore1, FinalScore2):- joue(equipe1,L, E1), joue(equipe2,L, E2), write(E1), write(E2), E1 + 1 =:= E2, NouvScore is E1 + E2 + Score1, jeuxV1(equipe1, equipe2, [[E1,E2]|L], nbDeParties, NouvScore, Score2, FinalScore1, FinalScore2),!.
-
-/*le cas ou ils ne sont pas consecutifs*/
-jeuxV1(equipe1, equipe2, L, nbDeParties, Score1, Score2, FinalScore1, FinalScore2):- joue(equipe1,L, E1), joue(equipe2,L, E2), write(E1), write(E2), S1 is Score1 + E1, S2 is Score2+ E2, jeuxV1(equipe1, equipe2, [[E1,E2]|L], nbDeParties, S1, S2, FinalScore1, FinalScore2).
+% Case when the numbers are not consecutive
+jeuxV1(Equipe1, Equipe2, L, NbDeParties, Score1, Score2, FinalScore1, FinalScore2) :-
+    joue(Equipe1, L, E1), 
+    joue(Equipe2, L, E2),
+    abs(E1 - E2) =\= 1,
+    NewScore1 is Score1 + E1, 
+    NewScore2 is Score2 + E2,
+    jeuxV1(Equipe1, Equipe2, [[E1, E2] | L], NbDeParties, NewScore1, NewScore2, FinalScore1, FinalScore2).
 
 
 
