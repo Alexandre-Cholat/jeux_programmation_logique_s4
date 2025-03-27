@@ -1,18 +1,23 @@
-/*Joue toujours 4 (erreur supprimee*/
+/*Joue toujours 4*/
 joue(tjrs4,_,4).
 
 /*aleatoire*/
 joue(aleatwar,_,N):-random_between(1,5,N).
+
+/*aleatoire entre 3 et 5, marche tres bien contre tit for tat*/
+joue(aleatwar2,_,N):-random_between(3,5,N).
+
+/*aleatoire entre 3 et 4, marche tres mal contre tit for tat*/
+joue(aleatwar3,_,N):-random_between(3,4,N).
+
 
 /*coup prÃ©cÃ©dent de l'adversaire
 */
 joue(titfortat,[],N):-random_between(1,5,N).
 joue(titfortat,[[_,C]|_],C).
 
-/*gestion de jeux tjrs false: erreur de nom de variable equipe? - oui, Equipe1 dois etre maj, et Nb de pqrties aussi*/
-
 gestionDeJeux(Equipe1, Equipe2, NbDeParties, FinalScore1, FinalScore2) :-
-    jeuxV1(Equipe1, Equipe2, [], NbDeParties, 0, 0, FinalScore1, FinalScore2).
+    jeuxV1(Equipe1, Equipe2, [], NbDeParties, 0, 0, FinalScore1, FinalScore2),!.
 
 jeuxV1(_, _, L, NbDeParties, Score1, Score2, Score1, Score2) :-
     length(L, Z),
