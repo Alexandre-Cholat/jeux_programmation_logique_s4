@@ -1,15 +1,25 @@
 /*Joue toujours 4*/
 joue(tjrs4,_,4).
+joue(tjrs5,_,5).
+
+/*comment determiner de quelle cote de la liste nous jouons?
+joue(strat2,[[X,Y]|_],Rep):-*/
 
 
 /*aleatoire*/
 joue(aleatwar,_,N):-random_between(1,5,N).
 
+/*aleatoire entre 2 et 5, inferieure a aleatwar234 */
+joue(aleatwar25,_,N):-random_between(2,5,N).
+
 /*aleatoire entre 3 et 5, marche tres bien contre tit for tat*/
-joue(aleatwar2,_,N):-random_between(3,5,N).
+joue(aleatwar35,_,N):-random_between(3,5,N).
+
+/*aleatoire entre 2 et 4, bat aleatwar35 ET titfortat*/
+joue(aleatwar234,_,N):-random_between(2,4,N).
 
 /*aleatoire entre 3 et 4, marche tres mal contre tit for tat*/
-joue(aleatwar3,_,N):-random_between(3,4,N).
+joue(aleatwar34,_,N):-random_between(3,4,N).
 
 
 /*coup prÃ©cÃ©dent de l'adversaire
