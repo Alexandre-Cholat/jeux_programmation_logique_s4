@@ -1,3 +1,5 @@
+/* Version 1 */
+
 /*Joue toujours 4*/
 joue(tjrs4,_,4).
 joue(tjrs5,_,5).
@@ -9,7 +11,7 @@ joue(strat2,[[E1,E2]|_],Rep):-E1 > E2, Rep = 4.
 joue(strat2,[[X,X]|_],4).
 joue(strat2,_,N):-random_between(2,4,N).
 
-/*Détection de l'adversaire qui joue toujours titfortat.*/
+/*Dï¿½tection de l'adversaire qui joue toujours titfortat.*/
 joue(antititfortat,[[E1,E2]|L], R):- titfortat(L, E2 ,3), write('titfortat detected'),E1>2, R = E1 -1.
 joue(antititfortat,[[_,E2]|L], 5):- titfortat(L, E2 ,3), write('titfortat detected').
 /*cas ou il ne joue pas titfortat*/
@@ -46,7 +48,7 @@ titfortat([[E1,E2]|L], Avant,Compte):-Avant =:= E2, C1 is Compte - 1, titfortat(
 
 
 
-/*Vos coups précédents sont toujours en première position*/
+/*Vos coups prï¿½cï¿½dents sont toujours en premiï¿½re position*/
 /* ce programme de gestion de jeux est donc seulement pour Equipe 1*/
 
 gestionDeJeux(Equipe1, Equipe2, NbDeParties, FinalScore1, FinalScore2) :-
