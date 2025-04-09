@@ -11,7 +11,7 @@ joue(strat2,[[E1,E2]|_],Rep):-E1 > E2, Rep = 4.
 joue(strat2,[[X,X]|_],4).
 joue(strat2,_,N):-random_between(2,4,N).
 
-/*D�tection de l'adversaire qui joue toujours titfortat.*/
+/*Detection de l'adversaire qui joue toujours titfortat.*/
 joue(antititfortat,[[E1,E2]|L], R):- titfortat(L, E2 ,3), write('titfortat detected'),E1>2, R = E1 -1.
 joue(antititfortat,[[_,E2]|L], 5):- titfortat(L, E2 ,3), write('titfortat detected').
 /*cas ou il ne joue pas titfortat*/
@@ -32,25 +32,30 @@ joue(aleatwar234,_,N):-random_between(2,4,N).
 /*aleatoire entre 3 et 4, marche tres mal contre tit for tat*/
 joue(aleatwar34,_,N):-random_between(3,4,N).
 
-
-
-
-/*coup prÃ©cÃ©dent de l'adversaire
-*/
+/*coup precedent de l'adversaire*/
 joue(titfortat,[],N):-random_between(1,5,N).
 joue(titfortat,[[_,C]|_],C).
-
-
 
 /*pour antititfortat*/
 titfortat(_,_,0).
 titfortat([[E1,E2]|L], Avant,Compte):-Avant =:= E2, C1 is Compte - 1, titfortat(L,E1,C1).
 
+/*joue(metastrat): selection de strat. calcul de score chaque 10 parties [[C1,Adv1],[C2,Adv2],[C3,Adv3]|L]*/
+joue(metastrat,[],R):-metastrat(L,0,R).
+joue(metastrat,L,R):- Multiple is Length // 10, metastrat(L,Multiple,R).
+/*pour quand Liste et une multiple de 10, nous voulons evaluer perf*/
+joue(metastrat,L,R):-length(L,Length), 0 is Length mod 10, Multiple is Length // 10, metastratEval(L,Multiple,R) .
+
+metastrat(L,0,R):-ScorePosD10(L), joue(aleatwar234,_,N).
+metastrat(L,0,R):-not(ScorePosD10(L)), metastrat(L,1,R).
+metastrat(L,1,R):- joue(tjrs5,_,5).
+
+ScorePosD10(
 
 
-/*Vos coups pr�c�dents sont toujours en premi�re position*/
+
+
 /* ce programme de gestion de jeux est donc seulement pour Equipe 1*/
-
 gestionDeJeux(Equipe1, Equipe2, NbDeParties, FinalScore1, FinalScore2) :-
     jeuxV1(Equipe1, Equipe2, [], NbDeParties, 0, 0, FinalScore1, FinalScore2),!.
 
