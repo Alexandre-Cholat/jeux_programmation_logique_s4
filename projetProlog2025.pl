@@ -4,7 +4,7 @@
 % Lancer le tournoi avec la requête: go.
 %
 % Liste des joueurs inscrits au tournoi
-inscrits([fivespammer, titfortat, avantage2, aleatwar234]).
+inscrits([fivespammer, titfortat, avantage2, aleatwar234, catch5spam]).
 
 % Affichage ou non des détails de chaque partie (oui/non).
 affichageDetails(oui).     % Indiquer oui pour voir les détails
@@ -32,6 +32,14 @@ joue(gambler,[[Prec,_]|_],C):-random(N),(N<0.2,C=Prec;random_between(1,5,C)).
 
 joue(fivespammer,_,C):-random(N),(N<0.2,random_between(1,5,C);C=5).
 
+joue(catch5spam,[[_,A],[_,B],[_,C],[_,D],[_,E],[_,F],[_,G],[_,H],[_,I],[_,J],[_,K]|_],4):-fivespam([A,B,C,D,E,F,G,H,I,J,K]).
+joue(catch5spam,_,R):-joue(aleatwar234,_,R).
+
+joue(catchSpam, L, R):-
+    listeCoupsPreced(L,L1),
+    catchSpam(L1,SpamNb),
+    R is SpamNb -1.
+
 
 joue(avantage2,[[_,A],[_,B],[_,C],[_,D],[_,E],[_,F],[_,G],[_,H],[_,I],[_,J],[_,K]|_],R):-
     A=\=1,
@@ -51,6 +59,15 @@ joue(avantage2,_,N):-random_between(2,4,N).
 /*aleatoire entre 2 et 4, bat aleatwar35 ET titfortat*/
 joue(aleatwar234,_,N):-random_between(2,4,N).
 
+fivespam([5|[]]).
+fivespam([X|L]):- X = 5, fivespam(L).
+
+catchSpam([A,B,C|L],A):- A = B, B = C.
+
+
+listeCoupsPreced([], []).  %Cas de base: liste vide
+listeCoupsPreced([[_, X]|Rest], [X|Xs]) :-
+    listeCoupsPreced(Rest, Xs).
 
 %%%%%%%%%%%%%%%%%%%%%%
 % GESTION DU TOURNOI %
