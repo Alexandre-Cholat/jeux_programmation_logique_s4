@@ -4,7 +4,7 @@
 % Lancer le tournoi avec la requête: go.
 %
 % Liste des joueurs inscrits au tournoi
-inscrits([random,titfortat,gambler, avantage2, aleatwar234]).
+inscrits([fivespammer, titfortat, avantage2, aleatwar234]).
 
 % Affichage ou non des détails de chaque partie (oui/non).
 affichageDetails(oui).     % Indiquer oui pour voir les détails
@@ -29,6 +29,9 @@ joue(titfortat,[[_,C]|_],C).
 % joue au hasard la première fois puis, soit son coup précédent avec une probabilité de 20% ou au hasard avec une probabilité de 80%
 joue(gambler,[],N):-random_between(1,5,N).
 joue(gambler,[[Prec,_]|_],C):-random(N),(N<0.2,C=Prec;random_between(1,5,C)).
+
+joue(fivespammer,_,C):-random(N),(N<0.2,random_between(1,5,C);C=5).
+
 
 joue(avantage2,[[_,A],[_,B],[_,C],[_,D],[_,E],[_,F],[_,G],[_,H],[_,I],[_,J],[_,K]|_],R):-
     A=\=1,

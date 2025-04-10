@@ -50,7 +50,11 @@ metastrat(L,0,R):-ScorePosD10(L), joue(aleatwar234,_,N).
 metastrat(L,0,R):-not(ScorePosD10(L)), metastrat(L,1,R).
 metastrat(L,1,R):- joue(tjrs5,_,5).
 
-ScorePosD10(
+ScorePosD10().
+
+/*si adversaire ne joue jamais 1, exploitons et multiplions par 2. Sinon aleatoire entre 2, 3, et 4*/
+joue(avantage2,[[_,A],[_,B],[_,C],[_,D],[_,E],[_,F],[_,G],[_,H],[_,I],[_,J],[_,K]|_],R):- A=\=1, B=\=1, C=\=1,D=\=1,E=\=1,F=\=1,G=\=1,H=\=1,I=\=1,K=\=1, R = 2.
+joue(avantage2,_,N):-random_between(2,4,N).
 
 
 
