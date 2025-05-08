@@ -1,0 +1,29 @@
+joue(ctrlAltDefeat, Historique, R):-
+   write('SPAM '),
+    listeCoupsPreced(Historique,L1),
+    catchSpam(L1,SpamNb),
+    R is SpamNb -1.
+
+
+joue(ctrlAltDefeat, Historique, R):-
+    write('ADVANTAGE 2 '),
+    \+member(1,Historique),
+    avantage2(Historique, R).
+
+joue(ctrlAltDefeat, Historique, R):-
+    write('DEFAULT '),
+    randSpam(Historique, R).
+
+
+avantage2(L,R):- length(L,Length), Length < 15, random(N),(N<0.5,random_between(2,5,R);R=2).
+avantage2(L,2):- length(L,Length), Length > 14, Length < 90.
+
+randSpam([[]],X):-random_between(2,4,X).
+randSpam([[A,_],[B,_],[C,_]|_], Rep):- C=A, A=B, random_between(1,5, Rep), Rep/=A.
+randSpam([[X,_]|_],X].
+
+catchSpam([A,B,C|L],A):- A = B, B = C.
+
+listeCoupsPreced([], []).  %Cas de base: liste vide
+listeCoupsPreced([[_, X]|Rest], [X|Xs]) :-
+    listeCoupsPreced(Rest, Xs).
