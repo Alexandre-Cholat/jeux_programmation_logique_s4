@@ -57,6 +57,12 @@ joue(avantage2,[[_,A],[_,B],[_,C],[_,D],[_,E],[_,F],[_,G],[_,H],[_,I],[_,J],[_,K
 joue(avantage2,_,N):-random_between(2,4,N).
 
 
+joue(fivespammer,_,C):-random(N),(N<0.2,C=random_between(1,5,C);5).
+
+joue(catch5spam,[[_,A],[_,B],[_,C],[_,D],[_,E],[_,F],[_,G],[_,H],[_,I],[_,J],[_,K]|_],4):-fivespam([A,B,C,D,E,F,G,H,I,J,K]).
+fivespam([5|[]]).
+fivespam([X|L]):- X = 5, fivespam(L).
+
 
 
 /* ce programme de gestion de jeux est donc seulement pour Equipe 1*/

@@ -44,7 +44,7 @@ titfortat([[E1,E2]|L], Avant,Compte):-Avant =:= E2, C1 is Compte - 1, titfortat(
 joue(metastrat,[],R):-metastrat(L,0,R).
 joue(metastrat,L,R):- Multiple is Length // 10, metastrat(L,Multiple,R).
 /*pour quand Liste et une multiple de 10, nous voulons evaluer perf*/
-joue(metastrat,L,R):-length(L,Length), 0 is Length mod 10, Multiple is Length // 10, metastratEval(L,Multiple,R) .
+joue(metastrat,L,R):-length(L,Length), 0 is Length mod 10, Multiple is Length // 10, metastratEval(L,Multiple,R).
 
 metastrat(L,0,R):-ScorePosD10(L), joue(aleatwar234,_,N).
 metastrat(L,0,R):-not(ScorePosD10(L)), metastrat(L,1,R).
@@ -99,3 +99,6 @@ jeuxV1(Equipe1, Equipe2, L, NbDeParties, Score1, Score2, FinalScore1, FinalScore
     S1 is Score1 + E1,
     S2 is Score2 + E2,
     write('Cas 3: Mise a jour des scores -> S1: '), write(S1), write(', S2: '), write(S2), nl, jeuxV1(Equipe1, Equipe2, [[E1, E2]|L], NbDeParties, S1, S2, FinalScore1, FinalScore2).
+
+
+
