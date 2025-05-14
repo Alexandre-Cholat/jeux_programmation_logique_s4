@@ -2,6 +2,41 @@
 
 Ce projet a été développé par Alexandre Cholat, Ramez Dahouathi et Julia Trimaille dans le cadre du cours de Prolog de l'UE Informatique de la Licence MIASHS, Université Grenoble Alpes
 , enseigné par le professeur Benoit Lemaire.
+
+## Règle du jeu
+Ce jeu se joue à 2 joueurs. Le but est d'obtenir le score le plus élevé après plusieurs tours.
+### VERSION 1. 
+Chaque joueur choisit un nombre entre 1 et 5 et les 2 joueurs les
+prononcent en même temps. Appelons A et B ces nombres. Si |A-B|=1 (donc si les deux
+nombres sont consécutifs), le joueur qui a proposé le nombre le plus petit obtient la valeur
+A+B et l'autre 0. Sinon, chaque joueur obtient la valeur de son nombre.
+Par exemple, si le premier joueur dit 4 et le second dit 2, le premier gagne 4 points et le
+second gagne 2 points. Au tour suivant, si le premier joueur dit 4 et le second dit 3, le
+premier joueur a 0 points et le second joueur a 7 points. Les scores sont : 4 (joueur 1) vs 9
+(joueur 2). Et on continue...
+### VERSION 2. 
+Mêmes règles que la version 1 excepté le fait que lorsqu'un joueur prononce
+un nombre N qui est le même que le précédent, le score potentiel est multiplié par luimême. Par exemple, si le deux nombres sont 4 et 2, les joueurs gagnent 4 et 2. Au tour
+suivant, si les deux nombres sont 4 et 1, le premier joueur gagne 4×4=16 et le second
+joueur gagne 1. Aux tours suivants, le gain est de nouveau multiplié en cas de nouvelle
+répétition ; donc si le joueur 1 dit de nouveau 4, il peut gagner 16×4=64 ! Sauf si
+l'adversaire prononce 3, auquel cas ce dernier gagne la somme des deux, donc 3+64 = 67 !!!
+La répétition d'un nombre permet de gagner beaucoup mais elle peut aussi faire perdre
+beaucoup.
+
+### Implémentation en Prolog
+Chaque équipe doit créer un prédicat joue/3.
+
+• Le premier argument est le nom de l'équipe.
+
+• Le second argument est la liste des coups précédents, en commençant par le dernier.
+Un coup est une paire de chiffres entre 1 et 5. Vos coups précédents sont toujours en
+première position. Par exemple, si les 2 premiers coups ont été 1 pour vous et 4
+pour l'adversaire, puis 3 pour vous et 2 pour l'adversaire, cette liste vaudra [[3,2],
+[1,4]]. Ce n'est pas à vous de gérer cette liste, elle va vous être donnée.
+
+• Le troisième argument est votre coup, un entier entre 1 et 5.
+
 ## Structure du Projet
 
 Voici une liste des fichiers inclus dans ce projet :
