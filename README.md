@@ -46,6 +46,7 @@ Voici une liste des fichiers inclus dans ce projet :
 - `projet-s4-gestionDeJeux.pl` : Gestionnaire de jeux Version 1 qui permet à n'importe quelle deux stratégies de jouer, et calculer le score au long de la partie. Nous avons également inclus un argument pour définir le nombre de parties à jouer. Il est à noter que ce gestionnaire n’inverse pas les listes donc le deuxième joueur peut uniquement jouer des stratégies simplistes ou bien doit être spécialement conçu pour jouer deuxième.
 - `projet-s4-prolog.pl` : Gestionnaire de jeux Version 2.
 - `projetProlog2025.pl` : Gestionnaire de jeux et tournois Version 2 créé par Benoit Lemaire, ainsi qu'un répertoire détaille de stratégies variées.
+- `algorithme_final.pl` : Analyse statistique de seuil d'échantillon de spam, strategie offensive/defensive, maintient la detection de spam.
 
 ## Installation
 
