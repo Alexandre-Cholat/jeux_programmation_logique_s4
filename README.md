@@ -9,8 +9,8 @@ Voici une liste des fichiers inclus dans ce projet :
 - `'ctrl+alt+defeat'_tournois_prolog_CDT.pl` : Itération de la stratégie ctrl+alt+defeat ayant participé au tournoi du jeu.
 - `final_ctrlAltDefeat.pl` : Itération de la stratégie ctrl+alt+defeat contenant les tactiques avantage2, randSpam, et catchSpam.
 - `projet-s4-gestionDeJeux.pl` : Gestionnaire de jeux Version 1 qui permet à n'importe quelle deux stratégies de jouer, et calculer le score au long de la partie. Nous avons également inclus un argument pour définir le nombre de parties à jouer. Il est à noter que ce gestionnaire n’inverse pas les listes donc le deuxième joueur peut uniquement jouer des stratégies simplistes ou bien doit être spécialement conçu pour jouer deuxième.
-- `projet-s4-prolog.pl` : [Brève description du contenu du fichier]
-- `projetProlog2025.pl` : Gestionnaire de jeux et tournois Version 2, ainsi qu'un répertoire détaille de stratégies variées.
+- `projet-s4-prolog.pl` : Gestionnaire de jeux Version 2.
+- `projetProlog2025.pl` : Gestionnaire de jeux et tournois Version 2, créé par Benoit Lemaire, ainsi qu'un répertoire détaille de stratégies variées.
 
 ## Installation
 
