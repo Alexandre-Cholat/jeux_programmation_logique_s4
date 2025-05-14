@@ -71,7 +71,7 @@ gestionDeJeux(Equipe1, Equipe2, NbDeParties, FinalScore1, FinalScore2) :-
 
 jeuxV1(_, _, L, NbDeParties, Score1, Score2, Score1, Score2) :-
     length(L, Z),
-    /*write('Checking base case: '), write(Z), write(' == '), write(NbDeParties), nl,*/
+    /*write('Verifions cas de base: '), write(Z), write(' == '), write(NbDeParties), nl,*/
     Z == NbDeParties.
 
 jeuxV1(Equipe1, Equipe2, L, NbDeParties, Score1, Score2, FinalScore1, FinalScore2) :-

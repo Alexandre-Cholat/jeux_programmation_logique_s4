@@ -10,11 +10,11 @@ joue(titfortat,[[_,C]|_],C).
 gestionDeJeuxV2(Equipe1, Equipe2, NbDeParties, FinalScore1, FinalScore2) :-
     jeuxV2(Equipe1, Equipe2, [], [], NbDeParties, 0, 0, FinalScore1, FinalScore2),!.
 
-/* Base case: when we've played the required number of rounds */
+/* Cas de base*/
 jeuxV2(_, _, History, _, NbDeParties, Score1, Score2, Score1, Score2) :-
     length(History, NbDeParties).
 
-/*Case 1: E2 + 1 = E1 (consecutive case NO repeats, sum goes to lower number player)*/
+/*Case 1: E2 + 1 = E1 (cas consecutive pas de repetitions, E2 gange)*/
 jeuxV2(Equipe1, Equipe2, History, [LastE1, LastE2], NbDeParties, Score1, Score2, FinalScore1, FinalScore2) :-
     joue(Equipe1, History, E1),
     joue(Equipe2, History, E2),
@@ -26,7 +26,7 @@ jeuxV2(Equipe1, Equipe2, History, [LastE1, LastE2], NbDeParties, Score1, Score2,
     write(', Score2 becomes '), write(NouvScore2), nl,
     jeuxV2(Equipe1, Equipe2, [[E1, E2]|History], [E1, E2], NbDeParties, Score1, NouvScore2, FinalScore1, FinalScore2).
 
-/* Case 2: E1 + 1 = E2 (consecutive case NO repeats, sum goes to lower number player) */
+/* Case 2: E1 + 1 = E2 (cas consecutive pas de repetitions, E1 gagne) */
 jeuxV2(Equipe1, Equipe2, History, [LastE1, LastE2], NbDeParties, Score1, Score2, FinalScore1, FinalScore2) :-
     joue(Equipe1, History, E1),
     joue(Equipe2, History, E2),
